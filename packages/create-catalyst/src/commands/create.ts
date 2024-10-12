@@ -1,26 +1,19 @@
 import { Command, Option } from '@commander-js/extra-typings';
 import { input, select } from '@inquirer/prompts';
 import chalk from 'chalk';
-import { exec as execCallback } from 'child_process';
+import { execSync } from 'child_process';
 import { pathExistsSync } from 'fs-extra/esm';
 import kebabCase from 'lodash.kebabcase';
 import { join } from 'path';
-import { promisify } from 'util';
 import { z } from 'zod';
 
-import { applyIntegration } from '../utils/apply-integration';
 import { checkStorefrontLimit } from '../utils/check-storefront-limit';
 import { cloneCatalyst } from '../utils/clone-catalyst';
-import { getLatestCoreTag } from '../utils/get-latest-core-tag';
 import { Https } from '../utils/https';
 import { installDependencies } from '../utils/install-dependencies';
 import { login } from '../utils/login';
 import { parse } from '../utils/parse';
-import { getPackageManager, packageManagerChoices } from '../utils/pm';
-import { spinner } from '../utils/spinner';
 import { writeEnv } from '../utils/write-env';
-
-const exec = promisify(execCallback);
 
 export const create = new Command('create')
   .description('Command to scaffold and connect a Catalyst storefront to your BigCommerce store')
@@ -30,13 +23,7 @@ export const create = new Command('create')
   .option('--access-token <token>', 'BigCommerce access token')
   .option('--channel-id <id>', 'BigCommerce channel ID')
   .option('--customer-impersonation-token <token>', 'BigCommerce customer impersonation token')
-  .option('--integration <provider>', 'Integration to apply to your new storefront')
-  .addOption(
-    new Option(
-      '--gh-ref <ref>',
-      'Clone a specific ref from the bigcommerce/catalyst repository',
-    ).default(getLatestCoreTag),
-  )
+  .option('--gh-ref <ref>', 'Clone a specific ref from the bigcommerce/catalyst repository')
   .addOption(
     new Option('--bigcommerce-hostname <hostname>', 'BigCommerce hostname')
       .default('bigcommerce.com')
@@ -47,38 +34,29 @@ export const create = new Command('create')
       .default('https://api.bc-sample.store')
       .hideHelp(),
   )
-  .addOption(
-    new Option('--package-manager <pm>', 'Override detected package manager')
-      .choices(packageManagerChoices)
-      .default(getPackageManager())
-      .hideHelp(),
-  )
-  .addOption(
-    new Option('--code-editor <editor>', 'Your preferred code editor')
-      .choices(['vscode'])
-      .default('vscode')
-      .hideHelp(),
-  )
-  .addOption(
-    new Option('--include-functional-tests', 'Include the functional test suite')
-      .default(false)
-      .hideHelp(),
-  )
+  // eslint-disable-next-line complexity
   .action(async (options) => {
-    const { packageManager, codeEditor, includeFunctionalTests } = options;
+    const { ghRef } = options;
+
+    try {
+      execSync('which git', { stdio: 'ignore' });
+    } catch {
+      console.error(chalk.red('Error: git is required to create a Catalyst project\n'));
+      process.exit(1);
+    }
+
+    try {
+      execSync('which pnpm', { stdio: 'ignore' });
+    } catch {
+      console.error(chalk.red('Error: pnpm is required to create a Catalyst project\n'));
+      console.error(chalk.yellow('Tip: Enable it by running `corepack enable pnpm`\n'));
+      process.exit(1);
+    }
 
     const URLSchema = z.string().url();
     const sampleDataApiUrl = parse(options.sampleDataApiUrl, URLSchema);
     const bigcommerceApiUrl = parse(`https://api.${options.bigcommerceHostname}`, URLSchema);
     const bigcommerceAuthUrl = parse(`https://login.${options.bigcommerceHostname}`, URLSchema);
-
-    let ghRef: string;
-
-    if (options.ghRef instanceof Function) {
-      ghRef = await options.ghRef();
-    } else {
-      ghRef = options.ghRef;
-    }
 
     let projectName;
     let projectDir;
@@ -142,13 +120,9 @@ export const create = new Command('create')
     if (!storeHash || !accessToken) {
       console.log(`\nCreating '${projectName}' at '${projectDir}'\n`);
 
-      await cloneCatalyst({ projectDir, projectName, ghRef, codeEditor, includeFunctionalTests });
+      cloneCatalyst({ projectDir, projectName, ghRef });
 
-      console.log(`\nUsing ${chalk.bold(packageManager)}\n`);
-
-      await installDependencies(projectDir, packageManager);
-
-      await applyIntegration(options.integration, { projectDir, packageManager });
+      await installDependencies(projectDir);
 
       console.log(
         [
@@ -242,7 +216,7 @@ export const create = new Command('create')
 
     console.log(`\nCreating '${projectName}' at '${projectDir}'\n`);
 
-    await cloneCatalyst({ projectDir, projectName, ghRef, codeEditor, includeFunctionalTests });
+    cloneCatalyst({ projectDir, projectName, ghRef });
 
     writeEnv(projectDir, {
       channelId: channelId.toString(),
@@ -250,21 +224,11 @@ export const create = new Command('create')
       customerImpersonationToken,
     });
 
-    console.log(`\nUsing ${chalk.bold(packageManager)}\n`);
-
-    await installDependencies(projectDir, packageManager);
-
-    await spinner(exec(`${packageManager} run --prefix ${projectDir} generate`), {
-      text: 'Creating GraphQL schema...',
-      successText: 'Created GraphQL schema',
-      failText: (err) => chalk.red(`Failed to create GraphQL schema: ${err.message}`),
-    });
-
-    await applyIntegration(options.integration, { projectDir, packageManager });
+    await installDependencies(projectDir);
 
     console.log(
       `\n${chalk.green('Success!')} Created '${projectName}' at '${projectDir}'\n`,
       '\nNext steps:\n',
-      chalk.yellow(`\ncd ${projectName} && ${packageManager} run dev\n`),
+      chalk.yellow(`\ncd ${projectName} && pnpm run dev\n`),
     );
   });
