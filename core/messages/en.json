@@ -26,10 +26,11 @@
     "heading": "Log In",
     "Form": {
       "error": "Your email address or password is incorrect. Try signing in again or reset your password",
+      "successful": "You have successfully logged in.",
       "emailLabel": "Email",
       "enterEmailMessage": "Enter your email",
       "passwordLabel": "Password",
-      "entePasswordMessage": "Enter your password",
+      "enterPasswordMessage": "Enter your password",
       "submitting": "Submitting...",
       "logIn": "Log in",
       "forgotPassword": "Forgot your password?"
@@ -40,7 +41,7 @@
       "fastCheckout": "Check out faster",
       "multipleAddresses": "Save multiple shipping addresses",
       "ordersHistory": "Access your order history",
-      "ordersTracking":  "Track new orders",
+      "ordersTracking": "Track new orders",
       "wishlists": "Save items to your Wishlist",
       "createLink": "Create Account "
     },
@@ -57,7 +58,7 @@
         "submit": "Reset password"
       },
       "Errors": {
-        "error":"Unknown error."
+        "error": "Unknown error."
       }
     }
   },
@@ -68,7 +69,8 @@
       "submit": "Create account",
       "submitting": "Creating account...",
       "recaptchaText": "Pass ReCAPTCHA check",
-      "confirmPassword": "Passwords don't match"
+      "confirmPassword": "Passwords don't match",
+      "successMessage": "Account was successfully created."
     },
     "Errors": {
       "inputError": "Something went wrong with processing user input.",
@@ -136,23 +138,47 @@
     "searchResults": "Search results for"
   },
   "Account": {
-    "Home": {
-      "title": "My account",
-      "heading": "My account",
+    "Layout": {
       "accountTabsLabel": "Account Tabs",
       "orders": "Orders",
-      "messages": "Messages",
       "addresses": "Addresses",
       "wishlists": "Wish lists",
       "recentlyViewed": "Recently viewed",
-      "settings": "Account settings",
-      "changePassword": "Change password",
-      "successMessage": "Your account has been successfully created"
+      "settings": "Account settings"
+    },
+    "Orders": {
+      "noOrders": "No orders yet",
+      "orderNumber": "Order #",
+      "placedDate": "Order placed",
+      "totalPrice": "Total",
+      "viewDetails": "View Details",
+      "trackOrder": "Track order",
+      "returnOrder": "Return items",
+      "orderSummary": "Order Summary",
+      "orderContents": "Order contents",
+      "orderSubtotal": "Subtotal:",
+      "orderGrandtotal": "Grand total:",
+      "orderDiscount": "Discount:",
+      "orderAppliedCoupon": "Coupon code ({code}):",
+      "orderShipping": "Shipping:",
+      "orderTax": "Tax:",
+      "printInvoice": "Print Invoice",
+      "repurchaseOrder": "Repurchase",
+      "return": "Return",
+      "shippedDate": "Shipped on",
+      "shippingAddress": "Shipping address",
+      "shippingMethod": "Shipping method",
+      "shipmentTitle": "Shipment",
+      "shippingTitle": "Shipping",
+      "shippingPayment": "Payment",
+      "shippingPaymentMethod": "Payment method",
+      "billingAddress": "Billing address"
     },
     "Addresses": {
       "title": "Addresses",
       "addNewAddress": "Add new address",
       "editButton": "Edit",
+      "emptyAddresses": "No addresses added",
       "deleteButton": "Delete",
       "confirmDeleteAddress": "Delete address",
       "deleteModalTitle": "Are you sure you want to delete this address?",
@@ -160,7 +186,6 @@
         "title": "Add address",
         "heading": "New address",
         "Form": {
-          "recaptchaText": "Pass ReCAPTCHA check",
           "submit": "Add new address",
           "submitting": "Saving address...",
           "cancel": "Cancel",
@@ -175,7 +200,6 @@
         "title": "Edit address",
         "heading": "Edit address",
         "Form": {
-          "recaptchaText": "Pass ReCAPTCHA check",
           "submit": "Edit address",
           "submitting": "Updating address...",
           "cancel": "Cancel",
@@ -199,19 +223,18 @@
       "title": "Account settings",
       "emptyTextValidatoinMessage": "This field can not be empty",
       "cancel": "Cancel",
-      "recaptchaText": "Pass ReCAPTCHA check",
       "changePassword": "Change password",
       "submit": "Update settings",
       "submitting": "Update settings...",
-      "successMessage": "Dear {firstName} {lastName}, you successfully updated your account data",
+      "successMessage": "Your account settings have been updated",
       "validationMessages": {
-          "email": "Enter a valid email such as name@domain.com",
-          "empty": "This field can not be empty",
-          "firstName": "Enter your first name",
-          "lastName": "Enter your last name",
-          "city": "Enter a suburb / city",
-          "company": "Enter a company name",
-          "phone": "Enter a phone number"
+        "email": "Enter a valid email such as name@domain.com",
+        "empty": "This field can not be empty",
+        "firstName": "Enter your first name",
+        "lastName": "Enter your last name",
+        "city": "Enter a suburb / city",
+        "company": "Enter a company name",
+        "phone": "Enter a phone number"
       },
       "ChangePassword": {
         "title": "Change password",
@@ -229,6 +252,7 @@
         "submitText": "Change password"
       },
       "UpdateCustomer": {
+        "successMessage": "Your account settings have been updated",
         "Errors": {
           "inputError": "Something went wrong with processing user input.",
           "notFound": "Customer does not exist"
@@ -334,8 +358,7 @@
       }
     },
     "AddToCart": {
-      "success": "{cartItems, plural, =1 {1 Item} other {# Items}} added to <cartLink> your cart</cartLink>",
-      "error": "Error adding product to cart. Please try again."
+      "success": "{cartItems, plural, =1 {1 Item} other {# Items}} added to <cartLink> your cart</cartLink>"
     }
   },
   "Product": {
@@ -343,9 +366,14 @@
     "Carousel": {
       "relatedProducts": "Related products"
     },
+    "Gallery": {
+      "previous": "Previous product image",
+      "next": "Next product image",
+      "thumbnailNavigation": "Thumbnail navigation",
+      "enlarge": "Enlarge product image"
+    },
     "Form": {
       "success": "{cartItems, plural, =1 {1 Item} other {# Items}} added to <cartLink> your cart</cartLink>",
-      "error": "Error adding product to cart. Please try again.",
       "saveToWishlist": "Save to wishlist",
       "quantityLabel": "Quantity"
     },
@@ -370,6 +398,8 @@
       "maxPurchase": "Maximum purchase",
       "availability": "Availability",
       "condition": "Condition",
+      "comingSoon": "Coming Soon",
+      "qty": "Qty",
       "weight": "Weight",
       "Prices": {
         "msrp": "MSRP",
@@ -427,7 +457,7 @@
     "Header": {
       "Account": {
         "account": "Account",
-        "myAccount": "My account",
+        "orders": "Orders",
         "addresses": "Addresses",
         "accountSettings": "Account settings",
         "login": "Login",
@@ -436,7 +466,34 @@
       "LocaleSwitcher": {
         "chooseCountryAndLanguage": "Choose your country and language",
         "goToSite": "Go to site"
+      },
+      "MiniCart": {
+        "cart": "Cart",
+        "items": "Cart Items"
+      },
+      "Navigation": {
+        "toggle": "Toggle navigation",
+        "navigationMenu": "Navigation menu"
+      },
+      "Search": {
+        "openSearchPopup": "Open search popup",
+        "closeSearchPopup": "Close search popup",
+        "searchBar": "Search bar",
+        "photo": "Photo",
+        "products": "Products",
+        "categories": "Categories",
+        "brands": "Brands",
+        "noSearchResults": "Sorry, no results for \"{term}\".",
+        "searchPlaceholder": "Search...",
+        "clearSearch": "Clear search",
+        "processing": "Processing..."
       }
+    },
+    "Footer": {
+      "socialMediaLinks": "Social media links"
+    },
+    "Breadcrumb": {
+      "breadcrumb": "Breadcrumb"
     },
     "Compare": {
       "compareButton": "Compare ({products})",
@@ -447,22 +504,45 @@
       "searchProducts": "Search for products",
       "searchPlaceholder": "Search...",
       "search": "Search",
-      "noSearchResults": "Sorry, no results for {term}.",
+      "noSearchResults": "Sorry, no results for \"{term}\".",
       "checkSpelling": "Please check the spelling or try another search."
     },
     "AddToCartButton": {
       "addToCart": "Add to cart",
-      "outOfStock": "Out of stock", 
+      "outOfStock": "Out of stock",
       "preorder": "Preorder",
       "unavailable": "Unavailable",
       "processing": "Processing..."
     },
     "ProductCard": {
+      "Compare": {
+        "compare": "Compare"
+      },
       "AddToCart": {
         "viewOptions": "View options",
-        "success": "{cartItems, plural, =1 {1 Item} other {# Items}} added to <cartLink> your cart</cartLink>",
-        "error": "Error adding product to cart. Please try again."
+        "success": "{cartItems, plural, =1 {1 Item} other {# Items}} added to <cartLink> your cart</cartLink>"
       }
+    },
+    "Slideshow": {
+      "slideshow": "Interactive slide show",
+      "slide": "Slide",
+      "previousSlide": "Previous slide",
+      "nextSlide": "Next slide",
+      "slideNo": "{n} of {total}",
+      "pause": "Pause slideshow",
+      "play": "Play slideshow"
+    },
+    "Pagination": {
+      "pagination": "Pagination",
+      "previous": "Previous",
+      "next": "Next"
+    },
+    "Carousel": {
+      "carousel": "Carousel",
+      "previousProducts": "Previous products",
+      "nextProducts": "Next products",
+      "slides": "Slides",
+      "goto": "Go to slide {n}"
     },
     "FormFields": {
       "Validation": {
@@ -481,6 +561,10 @@
         "password": "Enter a password",
         "phone": "Enter a phone number",
         "postalCode": "Enter a zip / postcode"
+      },
+      "Counter": {
+        "increase": "Increase count",
+        "decrease": "Decrease count"
       }
     }
   }

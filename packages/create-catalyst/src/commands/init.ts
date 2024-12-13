@@ -6,7 +6,10 @@ import * as z from 'zod';
 import { Https } from '../utils/https';
 import { login } from '../utils/login';
 import { parse } from '../utils/parse';
+import { Telemetry } from '../utils/telemetry/telemetry';
 import { writeEnv } from '../utils/write-env';
+
+const telemetry = new Telemetry();
 
 export const init = new Command('init')
   .description('Connect a BigCommerce store with an existing Catalyst project')
@@ -33,7 +36,7 @@ export const init = new Command('init')
     let storeHash = options.storeHash;
     let accessToken = options.accessToken;
     let channelId;
-    let customerImpersonationToken;
+    let storefrontToken;
 
     if (!options.storeHash || !options.accessToken) {
       const credentials = await login(bigCommerceAuthUrl);
@@ -49,6 +52,8 @@ export const init = new Command('init')
 
       process.exit(1);
     }
+
+    await telemetry.identify(storeHash);
 
     const bc = new Https({ bigCommerceApiUrl, storeHash, accessToken });
     const sampleDataApi = new Https({
@@ -85,7 +90,7 @@ export const init = new Command('init')
       } = await sampleDataApi.createChannel(newChannelName);
 
       channelId = createdChannelId;
-      customerImpersonationToken = storefrontApiToken;
+      storefrontToken = storefrontApiToken;
 
       /**
        * @todo prompt sample data API
@@ -117,19 +122,18 @@ export const init = new Command('init')
       channelId = existingChannel.id;
 
       const {
-        data: { token },
-      } = await bc.customerImpersonationToken();
+        data: { token: sfToken },
+      } = await bc.storefrontToken();
 
-      customerImpersonationToken = token;
+      storefrontToken = sfToken;
     }
 
     if (!channelId) throw new Error('Something went wrong, channelId is not defined');
-    if (!customerImpersonationToken)
-      throw new Error('Something went wrong, customerImpersonationToken is not defined');
+    if (!storefrontToken) throw new Error('Something went wrong, storefrontToken is not defined');
 
     writeEnv(projectDir, {
       channelId: channelId.toString(),
       storeHash,
-      customerImpersonationToken,
+      storefrontToken,
     });
   });

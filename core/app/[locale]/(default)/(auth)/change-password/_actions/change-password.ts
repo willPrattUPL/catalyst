@@ -34,7 +34,12 @@ const ChangePasswordMutation = graphql(`
   }
 `);
 
-export const changePassword = async (_previousState: unknown, formData: FormData) => {
+interface ChangePasswordResponse {
+  status: 'success' | 'error';
+  message: string;
+}
+
+export const changePassword = async (formData: FormData): Promise<ChangePasswordResponse> => {
   const t = await getTranslations('ChangePassword');
 
   try {
@@ -61,25 +66,18 @@ export const changePassword = async (_previousState: unknown, formData: FormData
 
     const result = response.data.customer.resetPassword;
 
-    if (result.errors.length === 0) {
-      return { status: 'success', message: '' };
+    if (result.errors.length > 0) {
+      result.errors.forEach((error) => {
+        throw new Error(error.message);
+      });
     }
 
     return {
-      status: 'error',
-      message: result.errors.map((error) => error.message).join('\n'),
+      status: 'success',
+      message: t('confirmChangePassword'),
     };
   } catch (error: unknown) {
-    if (error instanceof ZodError) {
-      return {
-        status: 'error',
-        message: error.issues
-          .map(({ path, message }) => `${path.toString()}: ${message}.`)
-          .join('\n'),
-      };
-    }
-
-    if (error instanceof Error) {
+    if (error instanceof Error || error instanceof ZodError) {
       return {
         status: 'error',
         message: error.message,

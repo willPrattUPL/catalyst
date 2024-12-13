@@ -29,7 +29,7 @@
             "emailLabel": "E-post",
             "enterEmailMessage": "Skriv inn epostadressen din",
             "passwordLabel": "Passord",
-            "entePasswordMessage": "Skriv inn passordet ditt.",
+            "enterPasswordMessage": "Skriv inn passordet ditt.",
             "submitting": "Sender inn …",
             "logIn": "Logg inn",
             "forgotPassword": "Har du glemt passordet?"
@@ -122,7 +122,11 @@
     "Category": {
         "sortBy": "{items, plural, =0 {no items} =1 {1 vare} other {# varer}}",
         "products": "Produkter",
-        "items": "Varer"
+        "items": "Varer",
+        "Empty": {
+            "message": "Ingen produkter i denne kategorien",
+            "cta": "Gå tilbake til Hjem"
+        }
     },
     "Search": {
         "title": "Søkeresultater",
@@ -149,6 +153,7 @@
             "title": "Adresser",
             "addNewAddress": "Legg til ny adresse",
             "editButton": "Rediger",
+            "emptyAddresses": "Ingen adresser lagt til",
             "deleteButton": "Slett",
             "confirmDeleteAddress": "Slett adresse",
             "deleteModalTitle": "Er du sikker på at du vil slette denne adressen?",
@@ -199,7 +204,7 @@
             "changePassword": "Endre passord",
             "submit": "Oppdater innstillingene",
             "submitting": "Oppdater innstillingene …",
-            "successMessage": "{firstName} {lastName}, du har oppdatert kontodataene dine",
+            "successMessage": "Kontoinnstillingene dine er oppdatert",
             "validationMessages": {
                 "email": "Angi en gyldig e-postadresse, for eksempel navn@domene.com",
                 "empty": "Dette feltet kan ikke være tomt",
@@ -330,8 +335,7 @@
             }
         },
         "AddToCart": {
-            "success": "{cartItems, plural, =1 {1 vare} other {# varer}} lagt til i <cartLink>handlekurven din</cartLink>",
-            "error": "Feil da produktet skulle legges til i handlekurven. Prøv igjen."
+            "success": "{cartItems, plural, =1 {1 vare} other {# varer}} lagt til i <cartLink>handlekurven din</cartLink>"
         }
     },
     "Product": {
@@ -339,9 +343,14 @@
         "Carousel": {
             "relatedProducts": "Relaterte produkter"
         },
+        "Gallery": {
+            "previous": "Forrige produktbilde",
+            "next": "Neste produktbilde",
+            "thumbnailNavigation": "Navigering med miniatyrbilder",
+            "enlarge": "Forstørre produktbildet"
+        },
         "Form": {
             "success": "{cartItems, plural, =1 {1 vare} other {# varer}} lagt til i <cartLink>handlekurven din</cartLink>",
-            "error": "Feil da produktet skulle legges til i handlekurven. Prøv igjen.",
             "saveToWishlist": "Legg til på ønskeliste",
             "quantityLabel": "Mengde"
         },
@@ -432,7 +441,34 @@
             "LocaleSwitcher": {
                 "chooseCountryAndLanguage": "Velg land og språk",
                 "goToSite": "Gå til nettstedet"
+            },
+            "MiniCart": {
+                "cart": "Handlekurv",
+                "items": "Varer i handlekurv"
+            },
+            "Navigation": {
+                "toggle": "Veksle navigasjon",
+                "navigationMenu": "Navigasjonsmeny"
+            },
+            "Search": {
+                "openSearchPopup": "Åpne popup-vinduet for søk",
+                "closeSearchPopup": "Lukk popup-vinduet for søk",
+                "searchBar": "Søkefelt",
+                "photo": "Foto",
+                "products": "Produkter",
+                "categories": "Kategorier",
+                "brands": "merker",
+                "noSearchResults": "Beklager, ingen resultater for «{term}».",
+                "searchPlaceholder": "Søk …",
+                "clearSearch": "Nullstill søk",
+                "processing": "Behandler …"
             }
+        },
+        "Footer": {
+            "socialMediaLinks": "Lenker til sosiale medier"
+        },
+        "Breadcrumb": {
+            "breadcrumb": "Brødsmuler"
         },
         "Compare": {
             "compareButton": "Sammenlign ({products})",
@@ -443,7 +479,7 @@
             "searchProducts": "Søk etter produkter",
             "searchPlaceholder": "Søk …",
             "search": "Søk",
-            "noSearchResults": "Beklager, ingen resultater for {term}.",
+            "noSearchResults": "Beklager, ingen resultater for «{term}».",
             "checkSpelling": "Kontroller stavemåten, eller prøv et annet søk."
         },
         "AddToCartButton": {
@@ -454,11 +490,34 @@
             "processing": "Behandler …"
         },
         "ProductCard": {
+            "Compare": {
+                "compare": "Sammenlign"
+            },
             "AddToCart": {
                 "viewOptions": "Vis alternativer",
-                "success": "{cartItems, plural, =1 {1 vare} other {# varer}} lagt til i <cartLink>handlekurven din</cartLink>",
-                "error": "Feil da produktet skulle legges til i handlekurven. Prøv igjen."
+                "success": "{cartItems, plural, =1 {1 vare} other {# varer}} lagt til i <cartLink>handlekurven din</cartLink>"
             }
+        },
+        "Slideshow": {
+            "slideshow": "Interaktiv lysbildefremvisning",
+            "slide": "Lysbilde",
+            "previousSlide": "Forrige lysbilde",
+            "nextSlide": "Neste lysbilde",
+            "slideNo": "{n} av {total}",
+            "pause": "Sett lysbildefremvisningen på pause",
+            "play": "Spill av lysbildefremvisning"
+        },
+        "Pagination": {
+            "pagination": "paginering",
+            "previous": "Forrige",
+            "next": "Neste"
+        },
+        "Carousel": {
+            "carousel": "Karusell",
+            "previousProducts": "Forrige produkter",
+            "nextProducts": "Neste produkter",
+            "slides": "Lysbilder",
+            "goto": "Gå til lysbilde {n}"
         },
         "FormFields": {
             "Validation": {
@@ -477,6 +536,10 @@
                 "password": "Skriv inn et passord",
                 "phone": "Skriv inn et telefonnummer",
                 "postalCode": "Skriv inn et postnummer"
+            },
+            "Counter": {
+                "increase": "Øk antall",
+                "decrease": "Reduser antall"
             }
         }
     }

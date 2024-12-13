@@ -29,7 +29,7 @@
             "emailLabel": "E-mail",
             "enterEmailMessage": "Inserisci la tua e-mail",
             "passwordLabel": "Password",
-            "entePasswordMessage": "Inserisci la tua password",
+            "enterPasswordMessage": "Inserisci la tua password",
             "submitting": "Invio in corso...",
             "logIn": "Accedi",
             "forgotPassword": "Hai dimenticato la password?"
@@ -122,7 +122,11 @@
     "Category": {
         "sortBy": "{items, plural, =0 {nessun articolo} =1 {1 articolo} other {# articoli}}",
         "products": "Prodotti",
-        "items": "articoli"
+        "items": "articoli",
+        "Empty": {
+            "message": "Non sono presenti prodotti in questa categoria",
+            "cta": "Ritorna alla Homepage"
+        }
     },
     "Search": {
         "title": "Risultati della ricerca",
@@ -149,6 +153,7 @@
             "title": "Indirizzi",
             "addNewAddress": "Aggiungi un nuovo indirizzo",
             "editButton": "Modifica",
+            "emptyAddresses": "Nessun indirizzo è stato aggiunto",
             "deleteButton": "Elimina",
             "confirmDeleteAddress": "Cancella indirizzo",
             "deleteModalTitle": "Vuoi davvero eliminare questo indirizzo?",
@@ -199,7 +204,7 @@
             "changePassword": "Cambia password",
             "submit": "AGGIORNA IMPOSTAZIONI",
             "submitting": "Aggiorna impostazioni...",
-            "successMessage": "Gentile {firstName} {lastName}, hai aggiornato con successo i dati del tuo account",
+            "successMessage": "Le impostazioni del tuo account sono state aggiornate",
             "validationMessages": {
                 "email": "Inserisci un indirizzo e-mail valido, ad esempio nome@dominio.com",
                 "empty": "Questo campo non può essere vuoto",
@@ -330,8 +335,7 @@
             }
         },
         "AddToCart": {
-            "success": "{cartItems, plural, =1 {1 articolo} other {# articoli}} aggiunto/i al <cartLink> carrello</cartLink>",
-            "error": "Errore durante l'aggiunta del prodotto al carrello. Riprova."
+            "success": "{cartItems, plural, =1 {1 articolo} other {# articoli}} aggiunto/i al <cartLink> carrello</cartLink>"
         }
     },
     "Product": {
@@ -339,9 +343,14 @@
         "Carousel": {
             "relatedProducts": "Prodotti simili"
         },
+        "Gallery": {
+            "previous": "Immagine del prodotto precedente",
+            "next": "Immagine prodotto successiva",
+            "thumbnailNavigation": "Navigazione con miniature",
+            "enlarge": "Ingrandisci immagine prodotto"
+        },
         "Form": {
             "success": "{cartItems, plural, =1 {1 articolo} other {# articoli}} aggiunto/i al <cartLink> carrello</cartLink>",
-            "error": "Errore durante l'aggiunta del prodotto al carrello. Riprova.",
             "saveToWishlist": "Salva nella lista dei desideri",
             "quantityLabel": "Quantità"
         },
@@ -432,7 +441,34 @@
             "LocaleSwitcher": {
                 "chooseCountryAndLanguage": "Scegli il paese e la lingua",
                 "goToSite": "Vai al sito"
+            },
+            "MiniCart": {
+                "cart": "Carrello",
+                "items": "Articoli nel carrello"
+            },
+            "Navigation": {
+                "toggle": "Attiva/Disattiva navigazione",
+                "navigationMenu": "Menu di navigazione"
+            },
+            "Search": {
+                "openSearchPopup": "Apri popup di ricerca",
+                "closeSearchPopup": "Chiudi finestra pop-up di ricerca",
+                "searchBar": "Barra di ricerca",
+                "photo": "Foto",
+                "products": "Prodotti",
+                "categories": "Categorie",
+                "brands": "Marchi",
+                "noSearchResults": "Sorry, no results for \"{term}\".",
+                "searchPlaceholder": "Cerca...",
+                "clearSearch": "Cancella ricerca",
+                "processing": "Elaborazione in corso..."
             }
+        },
+        "Footer": {
+            "socialMediaLinks": "Link ai social media"
+        },
+        "Breadcrumb": {
+            "breadcrumb": "Breadcrumb"
         },
         "Compare": {
             "compareButton": "Confronta ({products})",
@@ -443,7 +479,7 @@
             "searchProducts": "Cerca prodotti",
             "searchPlaceholder": "Cerca...",
             "search": "Cerca",
-            "noSearchResults": "Siamo spiacenti, nessun risultato per {term}.",
+            "noSearchResults": "Sorry, no results for \"{term}\".",
             "checkSpelling": "Controlla l'ortografia o prova un'altra ricerca."
         },
         "AddToCartButton": {
@@ -454,11 +490,34 @@
             "processing": "Elaborazione in corso..."
         },
         "ProductCard": {
+            "Compare": {
+                "compare": "Confronta"
+            },
             "AddToCart": {
                 "viewOptions": "Visualizza le opzioni",
-                "success": "{cartItems, plural, =1 {1 articolo} other {# articoli}} aggiunto/i al <cartLink> carrello</cartLink>",
-                "error": "Errore durante l'aggiunta del prodotto al carrello. Riprova."
+                "success": "{cartItems, plural, =1 {1 articolo} other {# articoli}} aggiunto/i al <cartLink> carrello</cartLink>"
             }
+        },
+        "Slideshow": {
+            "slideshow": "Presentazione interattiva",
+            "slide": "Slide",
+            "previousSlide": "Slide precedente",
+            "nextSlide": "Slide successiva",
+            "slideNo": "{n} su {total}",
+            "pause": "Metti in pausa presentazione",
+            "play": "Riproduci presentazione"
+        },
+        "Pagination": {
+            "pagination": "impaginazione",
+            "previous": "Indietro",
+            "next": "Avanti"
+        },
+        "Carousel": {
+            "carousel": "Carosello",
+            "previousProducts": "Prodotti precedenti",
+            "nextProducts": "Prodotti successivi",
+            "slides": "Slide",
+            "goto": "Vai alla slide {n}"
         },
         "FormFields": {
             "Validation": {
@@ -477,6 +536,10 @@
                 "password": "Inserisci una password",
                 "phone": "Inserisci un numero di telefono",
                 "postalCode": "Inserisci un codice postale"
+            },
+            "Counter": {
+                "increase": "Aumenta conteggio",
+                "decrease": "Diminuisci conteggio"
             }
         }
     }

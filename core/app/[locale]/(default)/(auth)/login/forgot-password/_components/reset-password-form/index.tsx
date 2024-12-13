@@ -1,11 +1,12 @@
 'use client';
 
+import { AlertCircle, Check } from 'lucide-react';
 import { useTranslations } from 'next-intl';
-import { ChangeEvent, useEffect, useRef, useState } from 'react';
+import { ChangeEvent, useRef, useState } from 'react';
 import { useFormStatus } from 'react-dom';
 import ReCaptcha from 'react-google-recaptcha';
+import { toast } from 'react-hot-toast';
 
-import { useAccountStatusContext } from '~/app/[locale]/(default)/account/(tabs)/_components/account-status-provider';
 import { type FragmentOf } from '~/client/graphql';
 import { Button } from '~/components/ui/button';
 import {
@@ -17,7 +18,6 @@ import {
   FormSubmit,
   Input,
 } from '~/components/ui/form';
-import { Message } from '~/components/ui/message';
 import { useRouter } from '~/i18n/routing';
 
 import { resetPassword } from '../../_actions/reset-password';
@@ -26,11 +26,6 @@ import { ResetPasswordFormFragment } from './fragment';
 
 interface Props {
   reCaptchaSettings?: FragmentOf<typeof ResetPasswordFormFragment>;
-}
-
-interface FormStatus {
-  status: 'success' | 'error';
-  message: string;
 }
 
 const SubmitButton = () => {
@@ -55,78 +50,57 @@ export const ResetPasswordForm = ({ reCaptchaSettings }: Props) => {
   const t = useTranslations('Login.ForgotPassword.Form');
 
   const form = useRef<HTMLFormElement>(null);
-  const [formStatus, setFormStatus] = useState<FormStatus | null>(null);
   const [isEmailValid, setIsEmailValid] = useState(true);
 
   const reCaptchaRef = useRef<ReCaptcha>(null);
-  const [reCaptchaToken, setReCaptchaToken] = useState('');
-  const [isReCaptchaValid, setReCaptchaValid] = useState(true);
-  const { setAccountState } = useAccountStatusContext();
+  const [reCaptchaToken, setReCaptchaToken] = useState<string | undefined>();
   const router = useRouter();
 
-  useEffect(() => {
-    setAccountState({ status: 'idle' });
-  }, [setAccountState]);
+  const isReCaptchaValid = Boolean(reCaptchaToken);
 
   const onReCatpchaChange = (token: string | null) => {
     if (!token) {
-      setReCaptchaValid(false);
+      setReCaptchaToken(undefined);
 
       return;
     }
 
     setReCaptchaToken(token);
-    setReCaptchaValid(true);
   };
 
   const handleEmailValidation = (e: ChangeEvent<HTMLInputElement>) => {
-    const validationStatus = e.target.validity.valueMissing;
+    const validationStatus = e.target.validity.valueMissing || e.target.validity.typeMismatch;
 
     setIsEmailValid(!validationStatus);
   };
 
   const onSubmit = async (formData: FormData) => {
-    if (reCaptchaSettings?.isEnabledOnStorefront && !reCaptchaToken) {
-      setReCaptchaValid(false);
+    if (reCaptchaSettings?.isEnabledOnStorefront && !isReCaptchaValid) {
+      return;
+    }
+
+    const { status, message } = await resetPassword(formData, '/change-password', reCaptchaToken);
+
+    if (status === 'error') {
+      reCaptchaRef.current?.reset();
+
+      toast.error(message, {
+        icon: <AlertCircle className="text-error-secondary" />,
+      });
 
       return;
     }
 
-    setReCaptchaValid(true);
-
-    const submit = await resetPassword({
-      formData,
-      reCaptchaToken,
-      path: '/change-password',
+    toast.success(message, {
+      icon: <Check className="text-success-secondary" />,
     });
 
-    if (submit.status === 'success') {
-      form.current?.reset();
-
-      const customerEmail = formData.get('email');
-
-      setAccountState({
-        status: 'success',
-        message: t('confirmResetPassword', { email: customerEmail?.toString() }),
-      });
-      router.push('/login');
-    }
-
-    if (submit.status === 'error') {
-      setFormStatus({ status: 'error', message: submit.error ?? '' });
-    }
-
-    reCaptchaRef.current?.reset();
+    form.current?.reset();
+    router.push('/login');
   };
 
   return (
     <>
-      {formStatus?.status === 'error' && (
-        <Message className="mb-8 w-full" variant={formStatus.status}>
-          <p>{formStatus.message}</p>
-        </Message>
-      )}
-
       <p className="mb-4 text-base">{t('description')}</p>
 
       <Form action={onSubmit} className="mb-14 flex flex-col gap-4 md:py-4 lg:p-0" ref={form}>
@@ -144,8 +118,14 @@ export const ResetPasswordForm = ({ reCaptchaSettings }: Props) => {
             />
           </FieldControl>
           <FieldMessage
-            className="absolute inset-x-0 bottom-0 inline-flex w-full text-sm text-gray-500"
+            className="absolute inset-x-0 bottom-0 inline-flex w-full text-xs text-error"
             match="valueMissing"
+          >
+            {t('emailValidationMessage')}
+          </FieldMessage>
+          <FieldMessage
+            className="absolute inset-x-0 bottom-0 inline-flex w-full text-xs text-error"
+            match="typeMismatch"
           >
             {t('emailValidationMessage')}
           </FieldMessage>
@@ -159,7 +139,7 @@ export const ResetPasswordForm = ({ reCaptchaSettings }: Props) => {
               sitekey={reCaptchaSettings.siteKey}
             />
             {!isReCaptchaValid && (
-              <span className="absolute inset-x-0 bottom-0 inline-flex w-full text-xs font-normal text-red-200">
+              <span className="absolute inset-x-0 bottom-0 inline-flex w-full text-xs text-error">
                 {t('recaptchaText')}
               </span>
             )}

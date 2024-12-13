@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { getFormatter } from 'next-intl/server';
 
-import { BcImage } from '~/components/bc-image';
+import { Image } from '~/components/image';
 import { Link } from '~/components/link';
 import { Tag } from '~/components/ui/tag';
 
@@ -10,12 +10,14 @@ import { SharingLinks } from './_components/sharing-links';
 import { getBlogPageData } from './page-data';
 
 interface Props {
-  params: {
+  params: Promise<{
     blogId: string;
-  };
+  }>;
 }
 
-export async function generateMetadata({ params: { blogId } }: Props): Promise<Metadata> {
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { blogId } = await params;
+
   const data = await getBlogPageData({ entityId: Number(blogId) });
   const blogPost = data?.content.blog?.post;
 
@@ -32,7 +34,9 @@ export async function generateMetadata({ params: { blogId } }: Props): Promise<M
   };
 }
 
-export default async function Blog({ params: { blogId } }: Props) {
+export default async function Blog({ params }: Props) {
+  const { blogId } = await params;
+
   const format = await getFormatter();
 
   const data = await getBlogPageData({ entityId: Number(blogId) });
@@ -58,7 +62,7 @@ export default async function Blog({ params: { blogId } }: Props) {
 
       {blogPost.thumbnailImage ? (
         <div className="mb-6 flex h-40 sm:h-80 lg:h-96">
-          <BcImage
+          <Image
             alt={blogPost.thumbnailImage.altText}
             className="h-full w-full object-cover object-center"
             height={900}

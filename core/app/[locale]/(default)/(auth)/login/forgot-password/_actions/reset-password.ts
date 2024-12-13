@@ -26,17 +26,16 @@ const ResetPasswordMutation = graphql(`
   }
 `);
 
-interface SubmitResetPasswordForm {
-  formData: FormData;
-  path: string;
-  reCaptchaToken: string;
+interface SubmitResetPasswordResponse {
+  status: 'success' | 'error';
+  message: string;
 }
 
-export const resetPassword = async ({
-  formData,
-  path,
-  reCaptchaToken,
-}: SubmitResetPasswordForm) => {
+export const resetPassword = async (
+  formData: FormData,
+  path: string,
+  reCaptchaToken?: string,
+): Promise<SubmitResetPasswordResponse> => {
   const t = await getTranslations('Login.ForgotPassword');
 
   try {
@@ -60,19 +59,24 @@ export const resetPassword = async ({
 
     const result = response.data.customer.requestResetPassword;
 
-    if (result.errors.length === 0) {
-      return { status: 'success', data: parsedData };
+    if (result.errors.length > 0) {
+      result.errors.forEach((error) => {
+        throw new Error(error.message);
+      });
     }
 
     return {
-      status: 'error',
-      error: result.errors.map((error) => error.message).join('\n'),
+      status: 'success',
+      message: t('Form.confirmResetPassword', { email: parsedData.email }),
     };
   } catch (error: unknown) {
     if (error instanceof Error || error instanceof z.ZodError) {
-      return { status: 'error', error: error.message };
+      return {
+        status: 'error',
+        message: error.message,
+      };
     }
 
-    return { status: 'error', error: t('Errors.error') };
+    return { status: 'error', message: t('Errors.error') };
   }
 };

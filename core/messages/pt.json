@@ -29,7 +29,7 @@
             "emailLabel": "Email",
             "enterEmailMessage": "Digite seu email",
             "passwordLabel": "Senha",
-            "entePasswordMessage": "Digite sua senha",
+            "enterPasswordMessage": "Digite sua senha",
             "submitting": "Enviando...",
             "logIn": "Credencial de acesso",
             "forgotPassword": "Esqueceu sua senha?"
@@ -122,7 +122,11 @@
     "Category": {
         "sortBy": "{items, plural, =0 {no items} =1 {1 item} other {# itens}}",
         "products": "Produtos",
-        "items": "itens"
+        "items": "itens",
+        "Empty": {
+            "message": "Não há produtos nesta categoria",
+            "cta": "Voltar para o início"
+        }
     },
     "Search": {
         "title": "Resultados da pesquisa",
@@ -149,6 +153,7 @@
             "title": "Endereços",
             "addNewAddress": "Adicionar novo endereço",
             "editButton": "Editar",
+            "emptyAddresses": "Nenhum endereço adicionado",
             "deleteButton": "Excluir",
             "confirmDeleteAddress": "Excluir endereço",
             "deleteModalTitle": "Deseja mesmo excluir esse endereço?",
@@ -199,7 +204,7 @@
             "changePassword": "Alterar senha",
             "submit": "Atualizar configurações",
             "submitting": "Atualizar configurações...",
-            "successMessage": "{firstName} {lastName}, os dados da sua conta foram atualizados.",
+            "successMessage": "As configurações da sua conta foram atualizadas",
             "validationMessages": {
                 "email": "Insira um e-mail válido, como nome@dominio.com",
                 "empty": "Este campo não pode ficar vazio",
@@ -330,8 +335,7 @@
             }
         },
         "AddToCart": {
-            "success": "{cartItems, plural, =1 {1 item} other {# itens}} adicionado(s) <cartLink> ao carrinho</cartLink>",
-            "error": "Erro ao colocar o produto no carrinho. Tente novamente."
+            "success": "{cartItems, plural, =1 {1 item} other {# itens}} adicionado(s) <cartLink> ao carrinho</cartLink>"
         }
     },
     "Product": {
@@ -339,9 +343,14 @@
         "Carousel": {
             "relatedProducts": "Produtos relacionados"
         },
+        "Gallery": {
+            "previous": "Imagem do produto anterior",
+            "next": "Próxima imagem do produto",
+            "thumbnailNavigation": "Navegação por miniaturas",
+            "enlarge": "Ampliar imagem do produto"
+        },
         "Form": {
             "success": "{cartItems, plural, =1 {1 item} other {# itens}} adicionado(s) <cartLink> ao carrinho</cartLink>",
-            "error": "Erro ao colocar o produto no carrinho. Tente novamente.",
             "saveToWishlist": "Salvar na lista de desejos",
             "quantityLabel": "Quantidade"
         },
@@ -432,7 +441,34 @@
             "LocaleSwitcher": {
                 "chooseCountryAndLanguage": "Escolha seu país e o idioma",
                 "goToSite": "Acessar o site"
+            },
+            "MiniCart": {
+                "cart": "Carrinho",
+                "items": "Itens do carrinho"
+            },
+            "Navigation": {
+                "toggle": "Alternar navegação",
+                "navigationMenu": "Menu de navegação"
+            },
+            "Search": {
+                "openSearchPopup": "Abrir pop-up de pesquisa",
+                "closeSearchPopup": "Fechar pop-up de pesquisa",
+                "searchBar": "Barra de pesquisa",
+                "photo": "Foto",
+                "products": "Produtos",
+                "categories": "Categorias",
+                "brands": "Marcas",
+                "noSearchResults": "Nenhum resultado para “{term}”.",
+                "searchPlaceholder": "Pesquisar...",
+                "clearSearch": "Limpar pesquisa",
+                "processing": "Processando..."
             }
+        },
+        "Footer": {
+            "socialMediaLinks": "Links de redes sociais"
+        },
+        "Breadcrumb": {
+            "breadcrumb": "Breadcrumb"
         },
         "Compare": {
             "compareButton": "Comparar ({products})",
@@ -443,7 +479,7 @@
             "searchProducts": "Pesquisar produtos",
             "searchPlaceholder": "Pesquisar...",
             "search": "Pesquisar",
-            "noSearchResults": "Não há resultados para {term}.",
+            "noSearchResults": "Nenhum resultado para “{term}”.",
             "checkSpelling": "Verifique a ortografia ou tente outra pesquisa."
         },
         "AddToCartButton": {
@@ -454,11 +490,34 @@
             "processing": "Processando..."
         },
         "ProductCard": {
+            "Compare": {
+                "compare": "Comparar"
+            },
             "AddToCart": {
                 "viewOptions": "Ver opções",
-                "success": "{cartItems, plural, =1 {1 item} other {# itens}} adicionado(s) <cartLink> ao carrinho</cartLink>",
-                "error": "Erro ao colocar o produto no carrinho. Tente novamente."
+                "success": "{cartItems, plural, =1 {1 item} other {# itens}} adicionado(s) <cartLink> ao carrinho</cartLink>"
             }
+        },
+        "Slideshow": {
+            "slideshow": "Apresentação de slides interativa",
+            "slide": "Slide",
+            "previousSlide": "Slide anterior",
+            "nextSlide": "Próximo slide",
+            "slideNo": "{n} de {total}",
+            "pause": "Pausar apresentação de slides",
+            "play": "Reproduzir apresentação de slides"
+        },
+        "Pagination": {
+            "pagination": "paginação",
+            "previous": "Anterior",
+            "next": "Próximo"
+        },
+        "Carousel": {
+            "carousel": "Carrossel",
+            "previousProducts": "Produtos anteriores",
+            "nextProducts": "Próximos produtos",
+            "slides": "Slides",
+            "goto": "Ir para o slide {n}"
         },
         "FormFields": {
             "Validation": {
@@ -477,6 +536,10 @@
                 "password": "Digite uma senha",
                 "phone": "Digite um número de telefone",
                 "postalCode": "Digite um CEP"
+            },
+            "Counter": {
+                "increase": "Aumentar número",
+                "decrease": "Diminuir número"
             }
         }
     }

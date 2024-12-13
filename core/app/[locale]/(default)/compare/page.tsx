@@ -2,12 +2,12 @@ import { removeEdgesAndNodes } from '@bigcommerce/catalyst-client';
 import { getFormatter, getTranslations } from 'next-intl/server';
 import * as z from 'zod';
 
-import { getSessionCustomerId } from '~/auth';
+import { getSessionCustomerAccessToken } from '~/auth';
 import { client } from '~/client';
 import { PricingFragment } from '~/client/fragments/pricing';
 import { graphql } from '~/client/graphql';
 import { revalidate } from '~/client/revalidate-target';
-import { BcImage } from '~/components/bc-image';
+import { Image } from '~/components/image';
 import { Link } from '~/components/link';
 import { SearchForm } from '~/components/search-form';
 import { Button } from '~/components/ui/button';
@@ -90,14 +90,14 @@ export async function generateMetadata() {
 }
 
 interface Props {
-  searchParams: Record<string, string | string[] | undefined>;
+  searchParams: Promise<Record<string, string | string[] | undefined>>;
 }
 
-export default async function Compare({ searchParams }: Props) {
+export default async function Compare(props: Props) {
+  const searchParams = await props.searchParams;
   const t = await getTranslations('Compare');
   const format = await getFormatter();
-
-  const customerId = await getSessionCustomerId();
+  const customerAccessToken = await getSessionCustomerAccessToken();
 
   const parsed = CompareParamsSchema.parse(searchParams);
   const productIds = parsed.ids?.filter((id) => !Number.isNaN(id));
@@ -108,8 +108,8 @@ export default async function Compare({ searchParams }: Props) {
       entityIds: productIds ?? [],
       first: productIds?.length ? MAX_COMPARE_LIMIT : 0,
     },
-    customerId,
-    fetchOptions: customerId ? { cache: 'no-store' } : { next: { revalidate } },
+    customerAccessToken,
+    fetchOptions: customerAccessToken ? { cache: 'no-store' } : { next: { revalidate } },
   });
 
   const products = removeEdgesAndNodes(data.site.products).map((product) => ({
@@ -157,7 +157,7 @@ export default async function Compare({ searchParams }: Props) {
                   return (
                     <td className="px-4" key={product.entityId}>
                       <Link aria-label={product.name} href={product.path}>
-                        <BcImage
+                        <Image
                           alt={product.defaultImage.altText}
                           height={300}
                           src={product.defaultImage.url}

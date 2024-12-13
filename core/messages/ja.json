@@ -29,7 +29,7 @@
             "emailLabel": "Eメール",
             "enterEmailMessage": "Enter your email",
             "passwordLabel": "パスワード",
-            "entePasswordMessage": "Enter your password",
+            "enterPasswordMessage": "Enter your password",
             "submitting": "提出中…",
             "logIn": "ログイン",
             "forgotPassword": "パスワードをお忘れですか?"
@@ -122,7 +122,11 @@
     "Category": {
         "sortBy": "{items, plural, =0 {no items} =1 {1 item} other {# items}}",
         "products": "商品",
-        "items": "お品物"
+        "items": "お品物",
+        "Empty": {
+            "message": "No products in this category",
+            "cta": "Return to Home"
+        }
     },
     "Search": {
         "title": "検索結果",
@@ -149,6 +153,7 @@
             "title": "住所",
             "addNewAddress": "Add new address",
             "editButton": "編集",
+            "emptyAddresses": "No addresses added",
             "deleteButton": "削除する",
             "confirmDeleteAddress": "アドレスの削除",
             "deleteModalTitle": "このアドレスを削除しますか?",
@@ -199,7 +204,7 @@
             "changePassword": "パスワード変更",
             "submit": "Update settings",
             "submitting": "Update settings...",
-            "successMessage": "Dear {firstName} {lastName}, you successfully updated your account data",
+            "successMessage": "Your account settings have been updated",
             "validationMessages": {
                 "email": "Enter a valid email such as name@domain.com",
                 "empty": "This field can not be empty",
@@ -330,8 +335,7 @@
             }
         },
         "AddToCart": {
-            "success": "{cartItems, plural, =1 {1 Item} other {# Items}} added to <cartLink> your cart</cartLink>",
-            "error": "Error adding product to cart. Please try again."
+            "success": "{cartItems, plural, =1 {1 Item} other {# Items}} added to <cartLink> your cart</cartLink>"
         }
     },
     "Product": {
@@ -339,9 +343,14 @@
         "Carousel": {
             "relatedProducts": "関連商品"
         },
+        "Gallery": {
+            "previous": "Previous product image",
+            "next": "Next product image",
+            "thumbnailNavigation": "Thumbnail navigation",
+            "enlarge": "Enlarge product image"
+        },
         "Form": {
             "success": "{cartItems, plural, =1 {1 Item} other {# Items}} added to <cartLink> your cart</cartLink>",
-            "error": "Error adding product to cart. Please try again.",
             "saveToWishlist": "Save to wishlist",
             "quantityLabel": "数量"
         },
@@ -432,7 +441,34 @@
             "LocaleSwitcher": {
                 "chooseCountryAndLanguage": "Choose your country and language",
                 "goToSite": "Go to site"
+            },
+            "MiniCart": {
+                "cart": "ショッピングカート",
+                "items": "ショッピングカート商品"
+            },
+            "Navigation": {
+                "toggle": "Toggle navigation",
+                "navigationMenu": "Navigation menu"
+            },
+            "Search": {
+                "openSearchPopup": "Open search popup",
+                "closeSearchPopup": "Close search popup",
+                "searchBar": "Search bar",
+                "photo": "Photo",
+                "products": "商品",
+                "categories": "カテゴリー",
+                "brands": "ブランド",
+                "noSearchResults": "Sorry, no results for \"{term}\".",
+                "searchPlaceholder": "検索…",
+                "clearSearch": "検索クリア",
+                "processing": "処理中..."
             }
+        },
+        "Footer": {
+            "socialMediaLinks": "ソーシャル·メディア·リンク"
+        },
+        "Breadcrumb": {
+            "breadcrumb": "Breadcrumb"
         },
         "Compare": {
             "compareButton": "Compare ({products})",
@@ -443,7 +479,7 @@
             "searchProducts": "Search for products",
             "searchPlaceholder": "検索…",
             "search": "検索",
-            "noSearchResults": "Sorry, no results for {term}.",
+            "noSearchResults": "Sorry, no results for \"{term}\".",
             "checkSpelling": "Please check the spelling or try another search."
         },
         "AddToCartButton": {
@@ -454,11 +490,34 @@
             "processing": "処理中..."
         },
         "ProductCard": {
+            "Compare": {
+                "compare": "価格比較"
+            },
             "AddToCart": {
                 "viewOptions": "View options",
-                "success": "{cartItems, plural, =1 {1 Item} other {# Items}} added to <cartLink> your cart</cartLink>",
-                "error": "Error adding product to cart. Please try again."
+                "success": "{cartItems, plural, =1 {1 Item} other {# Items}} added to <cartLink> your cart</cartLink>"
             }
+        },
+        "Slideshow": {
+            "slideshow": "Interactive slide show",
+            "slide": "スライド",
+            "previousSlide": "Previous slide",
+            "nextSlide": "Next slide",
+            "slideNo": "{n} of {total}",
+            "pause": "Pause slideshow",
+            "play": "Play slideshow"
+        },
+        "Pagination": {
+            "pagination": "Pagination",
+            "previous": "前の",
+            "next": "次へ"
+        },
+        "Carousel": {
+            "carousel": "カルーセル",
+            "previousProducts": "Previous products",
+            "nextProducts": "Next products",
+            "slides": "Slides",
+            "goto": "Go to slide {n}"
         },
         "FormFields": {
             "Validation": {
@@ -477,6 +536,10 @@
                 "password": "Enter a password",
                 "phone": "Enter a phone number",
                 "postalCode": "Enter a zip / postcode"
+            },
+            "Counter": {
+                "increase": "Increase count",
+                "decrease": "Decrease count"
             }
         }
     }

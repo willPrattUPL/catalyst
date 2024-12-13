@@ -12,7 +12,16 @@ import { Https } from '../utils/https';
 import { installDependencies } from '../utils/install-dependencies';
 import { login } from '../utils/login';
 import { parse } from '../utils/parse';
+import { Telemetry } from '../utils/telemetry/telemetry';
 import { writeEnv } from '../utils/write-env';
+
+function getPlatformCheckCommand(command: string): string {
+  const isWindows = process.platform === 'win32';
+
+  return isWindows ? `where.exe ${command}` : `which ${command}`;
+}
+
+const telemetry = new Telemetry();
 
 export const create = new Command('create')
   .description('Command to scaffold and connect a Catalyst storefront to your BigCommerce store')
@@ -21,9 +30,11 @@ export const create = new Command('create')
   .option('--store-hash <hash>', 'BigCommerce store hash')
   .option('--access-token <token>', 'BigCommerce access token')
   .option('--channel-id <id>', 'BigCommerce channel ID')
-  .option('--customer-impersonation-token <token>', 'BigCommerce customer impersonation token')
+  .option('--storefront-token <token>', 'BigCommerce storefront token')
   .option('--gh-ref <ref>', 'Clone a specific ref from the source repository')
+  .option('--reset-main', 'Reset the main branch to the gh-ref')
   .option('--repository <repository>', 'GitHub repository to clone from', 'bigcommerce/catalyst')
+  .option('--env <vars...>', 'Arbitrary environment variables to set in .env.local')
   .addOption(
     new Option('--bigcommerce-hostname <hostname>', 'BigCommerce hostname')
       .default('bigcommerce.com')
@@ -39,14 +50,14 @@ export const create = new Command('create')
     const { ghRef, repository } = options;
 
     try {
-      execSync('which git', { stdio: 'ignore' });
+      execSync(getPlatformCheckCommand('git'), { stdio: 'ignore' });
     } catch {
       console.error(chalk.red('Error: git is required to create a Catalyst project\n'));
       process.exit(1);
     }
 
     try {
-      execSync('which pnpm', { stdio: 'ignore' });
+      execSync(getPlatformCheckCommand('pnpm'), { stdio: 'ignore' });
     } catch {
       console.error(chalk.red('Error: pnpm is required to create a Catalyst project\n'));
       console.error(chalk.yellow('Tip: Enable it by running `corepack enable pnpm`\n'));
@@ -57,13 +68,14 @@ export const create = new Command('create')
     const sampleDataApiUrl = parse(options.sampleDataApiUrl, URLSchema);
     const bigcommerceApiUrl = parse(`https://api.${options.bigcommerceHostname}`, URLSchema);
     const bigcommerceAuthUrl = parse(`https://login.${options.bigcommerceHostname}`, URLSchema);
+    const resetMain = options.resetMain;
 
     let projectName;
     let projectDir;
     let storeHash = options.storeHash;
     let accessToken = options.accessToken;
     let channelId;
-    let customerImpersonationToken = options.customerImpersonationToken;
+    let storefrontToken = options.storefrontToken;
 
     if (options.channelId) {
       channelId = parseInt(options.channelId, 10);
@@ -107,6 +119,32 @@ export const create = new Command('create')
       });
     }
 
+    if (!projectName) throw new Error('Something went wrong, projectName is not defined');
+    if (!projectDir) throw new Error('Something went wrong, projectDir is not defined');
+
+    if (storeHash && channelId && storefrontToken) {
+      console.log(`\nCreating '${projectName}' at '${projectDir}'\n`);
+
+      cloneCatalyst({ repository, projectName, projectDir, ghRef, resetMain });
+
+      writeEnv(projectDir, {
+        channelId: channelId.toString(),
+        storeHash,
+        storefrontToken,
+        arbitraryEnv: options.env,
+      });
+
+      await installDependencies(projectDir);
+
+      console.log(
+        `\n${chalk.green('Success!')} Created '${projectName}' at '${projectDir}'\n`,
+        '\nNext steps:\n',
+        chalk.yellow(`\ncd ${projectName} && pnpm run dev\n`),
+      );
+
+      process.exit(0);
+    }
+
     if (!options.storeHash || !options.accessToken) {
       const credentials = await login(bigcommerceAuthUrl);
 
@@ -114,13 +152,10 @@ export const create = new Command('create')
       accessToken = credentials.accessToken;
     }
 
-    if (!projectName) throw new Error('Something went wrong, projectName is not defined');
-    if (!projectDir) throw new Error('Something went wrong, projectDir is not defined');
-
     if (!storeHash || !accessToken) {
       console.log(`\nCreating '${projectName}' at '${projectDir}'\n`);
 
-      cloneCatalyst({ repository, projectName, projectDir, ghRef });
+      cloneCatalyst({ repository, projectName, projectDir, ghRef, resetMain });
 
       await installDependencies(projectDir);
 
@@ -136,7 +171,10 @@ export const create = new Command('create')
       process.exit(0);
     }
 
-    if (!channelId || !customerImpersonationToken) {
+    // At this point we should have a storeHash and can identify the account
+    await telemetry.identify(storeHash);
+
+    if (!channelId || !storefrontToken) {
       const bc = new Https({ bigCommerceApiUrl: bigcommerceApiUrl, storeHash, accessToken });
       const sampleDataApi = new Https({
         sampleDataApiUrl,
@@ -174,7 +212,7 @@ export const create = new Command('create')
         await bc.createChannelMenus(createdChannelId);
 
         channelId = createdChannelId;
-        customerImpersonationToken = storefrontApiToken;
+        storefrontToken = storefrontApiToken;
 
         /**
          * @todo prompt sample data API
@@ -206,25 +244,25 @@ export const create = new Command('create')
         channelId = existingChannel.id;
 
         const {
-          data: { token },
-        } = await bc.customerImpersonationToken();
+          data: { token: sfToken },
+        } = await bc.storefrontToken();
 
-        customerImpersonationToken = token;
+        storefrontToken = sfToken;
       }
     }
 
     if (!channelId) throw new Error('Something went wrong, channelId is not defined');
-    if (!customerImpersonationToken)
-      throw new Error('Something went wrong, customerImpersonationToken is not defined');
+    if (!storefrontToken) throw new Error('Something went wrong, storefrontToken is not defined');
 
     console.log(`\nCreating '${projectName}' at '${projectDir}'\n`);
 
-    cloneCatalyst({ repository, projectName, projectDir, ghRef });
+    cloneCatalyst({ repository, projectName, projectDir, ghRef, resetMain });
 
     writeEnv(projectDir, {
       channelId: channelId.toString(),
       storeHash,
-      customerImpersonationToken,
+      storefrontToken,
+      arbitraryEnv: options.env,
     });
 
     await installDependencies(projectDir);

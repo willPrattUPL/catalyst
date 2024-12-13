@@ -29,7 +29,7 @@
             "emailLabel": "E-post",
             "enterEmailMessage": "Ange din e-postadress",
             "passwordLabel": "Lösenord",
-            "entePasswordMessage": "Ange ditt lösenord",
+            "enterPasswordMessage": "Ange ditt lösenord",
             "submitting": "Skickar ...",
             "logIn": "Logga in",
             "forgotPassword": "Glömt ditt lösenord?"
@@ -122,7 +122,11 @@
     "Category": {
         "sortBy": "{items, plural, =0 {no items} =1 {1 item} other {# items}}",
         "products": "Produkter",
-        "items": "varor"
+        "items": "varor",
+        "Empty": {
+            "message": "Inga produkter i denna kategori",
+            "cta": "Tillbaka till startsidan"
+        }
     },
     "Search": {
         "title": "Sökresultat",
@@ -149,6 +153,7 @@
             "title": "Adresser",
             "addNewAddress": "Lägg till ny adress",
             "editButton": "Redigera",
+            "emptyAddresses": "Inga adresser har lagts till",
             "deleteButton": "Radera",
             "confirmDeleteAddress": "Radera adress",
             "deleteModalTitle": "Är du säker på att du vill ta bort den här adressen?",
@@ -199,7 +204,7 @@
             "changePassword": "Ändra lösenor",
             "submit": "Uppdatera inställningar",
             "submitting": "Uppdatera inställningar ...",
-            "successMessage": "Bästa {firstName} {lastName}, du har uppdaterat dina kontouppgifter",
+            "successMessage": "Dina kontoinställningar har uppdaterats",
             "validationMessages": {
                 "email": "Ange en giltig e-postadress, t.ex. namn@domän.com",
                 "empty": "Det här fältet får inte vara tomt",
@@ -330,8 +335,7 @@
             }
         },
         "AddToCart": {
-            "success": "{cartItems, plural, =1 {1 Item} other {# Items}} har lagts till <cartLink> i kundvagnen</cartLink>",
-            "error": "Produkten kunde inte läggas till i kundvagnen. Försök igen."
+            "success": "{cartItems, plural, =1 {1 Item} other {# Items}} har lagts till <cartLink> i kundvagnen</cartLink>"
         }
     },
     "Product": {
@@ -339,9 +343,14 @@
         "Carousel": {
             "relatedProducts": "Relaterade produkter"
         },
+        "Gallery": {
+            "previous": "Föregående produktbild",
+            "next": "Nästa produktbild",
+            "thumbnailNavigation": "Navigering med miniatyrbild",
+            "enlarge": "Förstora produktbilden"
+        },
         "Form": {
             "success": "{cartItems, plural, =1 {1 Item} other {# Items}} har lagts till <cartLink> i kundvagnen</cartLink>",
-            "error": "Produkten kunde inte läggas till i kundvagnen. Försök igen.",
             "saveToWishlist": "Spara i önskelistan",
             "quantityLabel": "Kvantitet"
         },
@@ -432,7 +441,34 @@
             "LocaleSwitcher": {
                 "chooseCountryAndLanguage": "Välj land och språk",
                 "goToSite": "Gå till webbplatsen"
+            },
+            "MiniCart": {
+                "cart": "Kundvagn",
+                "items": "Artiklar i kundvagnen"
+            },
+            "Navigation": {
+                "toggle": "Växla navigering",
+                "navigationMenu": "Navigera meny"
+            },
+            "Search": {
+                "openSearchPopup": "Öppna popup-fönstret för sökning",
+                "closeSearchPopup": "Stäng popup-fönstret för sökning",
+                "searchBar": "Sökfält",
+                "photo": "Foto",
+                "products": "Produkter",
+                "categories": "Kategorier",
+                "brands": "Varumärke",
+                "noSearchResults": "Tyvärr finns inga resultat för ”{term}”.",
+                "searchPlaceholder": "Sök...",
+                "clearSearch": "Rensa sökning",
+                "processing": "Behandlar…"
             }
+        },
+        "Footer": {
+            "socialMediaLinks": "Sociala Media-länkar"
+        },
+        "Breadcrumb": {
+            "breadcrumb": "Breadcrumb"
         },
         "Compare": {
             "compareButton": "Jämför ({products})",
@@ -443,7 +479,7 @@
             "searchProducts": "Sök efter produkter",
             "searchPlaceholder": "Sök...",
             "search": "Sök",
-            "noSearchResults": "Tyvärr, inga resultat för {term}.",
+            "noSearchResults": "Tyvärr finns inga resultat för ”{term}”.",
             "checkSpelling": "Kontrollera stavningen eller försök med en annan sökning."
         },
         "AddToCartButton": {
@@ -454,11 +490,34 @@
             "processing": "Behandlar…"
         },
         "ProductCard": {
+            "Compare": {
+                "compare": "Jämför"
+            },
             "AddToCart": {
                 "viewOptions": "Visa alternativ",
-                "success": "{cartItems, plural, =1 {1 Item} other {# Items}} har lagts till <cartLink> i kundvagnen</cartLink>",
-                "error": "Produkten kunde inte läggas till i kundvagnen. Försök igen."
+                "success": "{cartItems, plural, =1 {1 Item} other {# Items}} har lagts till <cartLink> i kundvagnen</cartLink>"
             }
+        },
+        "Slideshow": {
+            "slideshow": "Interaktivt bildspel",
+            "slide": "Glida",
+            "previousSlide": "Föregående bild",
+            "nextSlide": "Nästa bild",
+            "slideNo": "{n} av {total}",
+            "pause": "Pausa bildspelet",
+            "play": "Spela upp bildspel"
+        },
+        "Pagination": {
+            "pagination": "sidnumrering",
+            "previous": "Föregående",
+            "next": "Nästa"
+        },
+        "Carousel": {
+            "carousel": "Karusell",
+            "previousProducts": "Tidigare produkter",
+            "nextProducts": "Nästa produkter",
+            "slides": "Bilder",
+            "goto": "Gå till bild {n}"
         },
         "FormFields": {
             "Validation": {
@@ -477,6 +536,10 @@
                 "password": "Ange ett lösenord",
                 "phone": "Ange ett telefonnummer",
                 "postalCode": "Ange ett postnummer"
+            },
+            "Counter": {
+                "increase": "Öka antal",
+                "decrease": "Minska antal"
             }
         }
     }

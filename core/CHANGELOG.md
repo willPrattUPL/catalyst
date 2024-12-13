@@ -1,5 +1,180 @@
 # Changelog
 
+## 0.23.0
+
+### Minor Changes
+
+- [#1639](https://github.com/bigcommerce/catalyst/pull/1639) [`ae2c6cd`](https://github.com/bigcommerce/catalyst/commit/ae2c6cd76b2ccc5c994bd298983cb1665c571d02) Thanks [@bc-alexsaiannyi](https://github.com/bc-alexsaiannyi)! - Add orders for customer account. Now customer can open orders history or move to specific order details.
+
+- [#1729](https://github.com/bigcommerce/catalyst/pull/1729) [`d52affe`](https://github.com/bigcommerce/catalyst/commit/d52affe56dee23a81263392030fe635c824fb182) Thanks [@chanceaclark](https://github.com/chanceaclark)! - Removed ReCaptcha validation when you are logged in and making account changes. We have already validated a customer is human at the loggin screen.
+
+- [#1728](https://github.com/bigcommerce/catalyst/pull/1728) [`d7dbd7a`](https://github.com/bigcommerce/catalyst/commit/d7dbd7a04fc8cb87cf223fb5a17af8d59c6431ea) Thanks [@chanceaclark](https://github.com/chanceaclark)! - Convert the messages that were displayed when deleting an address over to using the toast functionality.
+
+### Patch Changes
+
+- [#1727](https://github.com/bigcommerce/catalyst/pull/1727) [`d3c6dbc`](https://github.com/bigcommerce/catalyst/commit/d3c6dbc25c16901f694e053ccdee8193647f5760) Thanks [@migueloller](https://github.com/migueloller)! - Ignore empty strings when parsing array URL search parameters in faceted search.
+
+- [#1730](https://github.com/bigcommerce/catalyst/pull/1730) [`ad8c86d`](https://github.com/bigcommerce/catalyst/commit/ad8c86d574474eb5ed18d99265fe4001d267fb5f) Thanks [@chanceaclark](https://github.com/chanceaclark)! - Fixes the inventory handling to handle some options being out of stock.
+
+## 0.22.1
+
+### Patch Changes
+
+- [#1649](https://github.com/bigcommerce/catalyst/pull/1649) [`d38f164`](https://github.com/bigcommerce/catalyst/commit/d38f164d3e87ca87d3e792f8058a74c1f13e4220) Thanks [@bc-alexsaiannyi](https://github.com/bc-alexsaiannyi)! - improve account forms submit errors message
+
+- [#1651](https://github.com/bigcommerce/catalyst/pull/1651) [`1a222cb`](https://github.com/bigcommerce/catalyst/commit/1a222cb09dfc65b440090f868b01291e644bec4a) Thanks [@bc-yevhenii-buliuk](https://github.com/bc-yevhenii-buliuk)! - refresh the entire list of addresses after deleting an address
+
+- [#1722](https://github.com/bigcommerce/catalyst/pull/1722) [`1f0c2ef`](https://github.com/bigcommerce/catalyst/commit/1f0c2ef9212be079630f64a15a2f121ed7a358f9) Thanks [@chanceaclark](https://github.com/chanceaclark)! - Remove `--turbo` from `pnpm dev` as it has some issues with the latest dependency bump, along with others.
+
+## 0.22.0
+
+### Minor Changes
+
+- [#1717](https://github.com/bigcommerce/catalyst/pull/1717) [`12fea79`](https://github.com/bigcommerce/catalyst/commit/12fea7962c25c395b550717343300561fb8d6a4c) Thanks [@chanceaclark](https://github.com/chanceaclark)! - Add a check for variant stock levels on add to cart button
+
+- [#1674](https://github.com/bigcommerce/catalyst/pull/1674) [`512c338`](https://github.com/bigcommerce/catalyst/commit/512c338e4abcb3cdb7f457e4012e0c90c6a8391a) Thanks [@chanceaclark](https://github.com/chanceaclark)! - Uses the API responses to show better errors when adding a product to the cart.
+
+- [#1710](https://github.com/bigcommerce/catalyst/pull/1710) [`15edf31`](https://github.com/bigcommerce/catalyst/commit/15edf311f5508a85f09acd8135fbf2b4aae09ff0) Thanks [@chanceaclark](https://github.com/chanceaclark)! - Rename `BcImage` to `Image`
+
+- [#1703](https://github.com/bigcommerce/catalyst/pull/1703) [`7b598ff`](https://github.com/bigcommerce/catalyst/commit/7b598ff012ce40fe4b34be780c01cdbbe61e9b7e) Thanks [@chanceaclark](https://github.com/chanceaclark)! - Adds localized data fetching withing the beforeRequest client helper. If information is translated (currently possible to update via the Admin GraphQL API) then we will return the translated product data. See https://developer.bigcommerce.com/docs/store-operations/catalog/graphql-admin/product-basic-info for more information on how to use overrides.
+
+- [#1710](https://github.com/bigcommerce/catalyst/pull/1710) [`15edf31`](https://github.com/bigcommerce/catalyst/commit/15edf311f5508a85f09acd8135fbf2b4aae09ff0) Thanks [@chanceaclark](https://github.com/chanceaclark)! - Force usage of the `<Image/>` component. This component should fallback to using the default image loader if the url doesn't come from the BigCommerce CDN.
+
+- [#1672](https://github.com/bigcommerce/catalyst/pull/1672) [`ffefc61`](https://github.com/bigcommerce/catalyst/commit/ffefc6151b0fb09bf83e7556736452a3138ef9c4) Thanks [@chanceaclark](https://github.com/chanceaclark)! - If a string is not provided in the selected locale, the translation system will fallback to "en" for that specific entry.
+
+### Patch Changes
+
+- [#1661](https://github.com/bigcommerce/catalyst/pull/1661) [`93d9984`](https://github.com/bigcommerce/catalyst/commit/93d99844ed4957a5a4611970589a2246b1dffb16) Thanks [@bookernath](https://github.com/bookernath)! - Remove webpack chunk plugin
+
+- [#1688](https://github.com/bigcommerce/catalyst/pull/1688) [`3267840`](https://github.com/bigcommerce/catalyst/commit/3267840981ebb6ed62e0b87f60623d0c4352309d) Thanks [@thebigrick](https://github.com/thebigrick)! - Added aria label for compare button
+
+- [#1617](https://github.com/bigcommerce/catalyst/pull/1617) [`c852961`](https://github.com/bigcommerce/catalyst/commit/c852961063fb090907b23074301fcbc41e75b8ec) Thanks [@bc-yevhenii-buliuk](https://github.com/bc-yevhenii-buliuk)! - UX improvements for account pages
+
+- [#1690](https://github.com/bigcommerce/catalyst/pull/1690) [`ee6bbb9`](https://github.com/bigcommerce/catalyst/commit/ee6bbb96e9c357af249fb881f5de503f9e164fb1) Thanks [@thebigrick](https://github.com/thebigrick)! - Added localization to hardcoded strings
+
+- [#1647](https://github.com/bigcommerce/catalyst/pull/1647) [`ad5ed3f`](https://github.com/bigcommerce/catalyst/commit/ad5ed3f50f6d3025bf299cc04f51bf0864afd3a2) Thanks [@bc-alexsaiannyi](https://github.com/bc-alexsaiannyi)! - update submit create account errors message
+
+- [#1715](https://github.com/bigcommerce/catalyst/pull/1715) [`2960a70`](https://github.com/bigcommerce/catalyst/commit/2960a708084030b484de945e725b5bd0c32462ee) Thanks [@bc-svc-local](https://github.com/bc-svc-local)! - Update translations.
+
+- [#1694](https://github.com/bigcommerce/catalyst/pull/1694) [`07f8463`](https://github.com/bigcommerce/catalyst/commit/07f84634000c4d1dac6f89037d9501bc056537c9) Thanks [@bc-svc-local](https://github.com/bc-svc-local)! - Update translations.
+
+## 0.21.0
+
+### Minor Changes
+
+- [#1631](https://github.com/bigcommerce/catalyst/pull/1631) [`58d9e7c`](https://github.com/bigcommerce/catalyst/commit/58d9e7ccb7915593cd012cce6d9f4bdf66cb381f) Thanks [@deini](https://github.com/deini)! - fetch available locales at build time
+
+### Patch Changes
+
+- [#1636](https://github.com/bigcommerce/catalyst/pull/1636) [`23abacf`](https://github.com/bigcommerce/catalyst/commit/23abacfb8ff4ff9d269e51821a6a992a9cb2d4f5) Thanks [@chanceaclark](https://github.com/chanceaclark)! - Remove console.error when falling back to defaultChannelId
+
+- [#1636](https://github.com/bigcommerce/catalyst/pull/1636) [`23abacf`](https://github.com/bigcommerce/catalyst/commit/23abacfb8ff4ff9d269e51821a6a992a9cb2d4f5) Thanks [@chanceaclark](https://github.com/chanceaclark)! - Clean up login error handling.
+
+- Updated dependencies [[`23abacf`](https://github.com/bigcommerce/catalyst/commit/23abacfb8ff4ff9d269e51821a6a992a9cb2d4f5)]:
+  - @bigcommerce/catalyst-client@0.14.0
+
+## 0.20.0
+
+### Minor Changes
+
+- [#1623](https://github.com/bigcommerce/catalyst/pull/1623) [`16e3a76`](https://github.com/bigcommerce/catalyst/commit/16e3a763571324dccd9031a79e400409eff9ee0c) Thanks [@chanceaclark](https://github.com/chanceaclark)! - Next 15 upgrade
+
+### Patch Changes
+
+- [#1629](https://github.com/bigcommerce/catalyst/pull/1629) [`72a30a8`](https://github.com/bigcommerce/catalyst/commit/72a30a84193f7ed8a09b770d16dd2c9a8a7d1347) Thanks [@deini](https://github.com/deini)! - Use Typescript on Next Config
+
+- [#1618](https://github.com/bigcommerce/catalyst/pull/1618) [`d60e916`](https://github.com/bigcommerce/catalyst/commit/d60e916661385fab211f7e8b1342dbda2fd504b9) Thanks [@bc-svc-local](https://github.com/bc-svc-local)! - Update translations.
+
+- Updated dependencies [[`16e3a76`](https://github.com/bigcommerce/catalyst/commit/16e3a763571324dccd9031a79e400409eff9ee0c)]:
+  - @bigcommerce/catalyst-client@0.13.0
+
+## 0.19.0
+
+### Minor Changes
+
+- [#1262](https://github.com/bigcommerce/catalyst/pull/1262) [`0c2023b`](https://github.com/bigcommerce/catalyst/commit/0c2023bae650039cd79ba51b1161b5c8c16f0b8d) Thanks [@chanceaclark](https://github.com/chanceaclark)! - Removes all usages of the customer impersonation token. Also updates the docs to correspond with the Storefront API Token.
+
+- [#1262](https://github.com/bigcommerce/catalyst/pull/1262) [`0c2023b`](https://github.com/bigcommerce/catalyst/commit/0c2023bae650039cd79ba51b1161b5c8c16f0b8d) Thanks [@chanceaclark](https://github.com/chanceaclark)! - Allows the ability to consume a [storefront token](https://developer.bigcommerce.com/docs/rest-authentication/tokens#storefront-tokens). This new token will allow Catalyst to create `customerAccessToken`'s whenever a user logs into their account. This change doesn't include consuming the either token, only adding the ability to pass it in.
+
+### Patch Changes
+
+- Updated dependencies [[`0c2023b`](https://github.com/bigcommerce/catalyst/commit/0c2023bae650039cd79ba51b1161b5c8c16f0b8d), [`0c2023b`](https://github.com/bigcommerce/catalyst/commit/0c2023bae650039cd79ba51b1161b5c8c16f0b8d)]:
+  - @bigcommerce/catalyst-client@0.12.0
+
+## 0.18.1
+
+### Patch Changes
+
+- [#1525](https://github.com/bigcommerce/catalyst/pull/1525) [`e751319`](https://github.com/bigcommerce/catalyst/commit/e751319728359a2e72d48072a4b68055ed4dbb1e) Thanks [@bc-alexsaiannyi](https://github.com/bc-alexsaiannyi)! - fix warning for using the same keys on items
+
+- [#1521](https://github.com/bigcommerce/catalyst/pull/1521) [`fd83a78`](https://github.com/bigcommerce/catalyst/commit/fd83a78f94b170dcf6e8aed14c61e3791b64c5de) Thanks [@bc-yevhenii-buliuk](https://github.com/bc-yevhenii-buliuk)! - fix styles for active account tab
+
+- [#1520](https://github.com/bigcommerce/catalyst/pull/1520) [`c898792`](https://github.com/bigcommerce/catalyst/commit/c898792a0ed3ee9849cdfeda7018245e491e8016) Thanks [@bc-alexsaiannyi](https://github.com/bc-alexsaiannyi)! - improve error message on reset password page
+
+- [#1524](https://github.com/bigcommerce/catalyst/pull/1524) [`f08883c`](https://github.com/bigcommerce/catalyst/commit/f08883c8fa559f0b6015321e2396606d77fa0ad6) Thanks [@bc-alexsaiannyi](https://github.com/bc-alexsaiannyi)! - improve behaviour for change password page for logged in user
+
+- [#1529](https://github.com/bigcommerce/catalyst/pull/1529) [`22426b2`](https://github.com/bigcommerce/catalyst/commit/22426b256e29b6c3dd145fd6df9ed57c5a99bd75) Thanks [@bc-yevhenii-buliuk](https://github.com/bc-yevhenii-buliuk)! - fix validation message for email on account settings page
+
+- [#1516](https://github.com/bigcommerce/catalyst/pull/1516) [`41270c2`](https://github.com/bigcommerce/catalyst/commit/41270c29a6e21217622c29b18e91f9a24d58ea8b) Thanks [@bc-svc-local](https://github.com/bc-svc-local)! - Update translations.
+
+- [#1534](https://github.com/bigcommerce/catalyst/pull/1534) [`de48618`](https://github.com/bigcommerce/catalyst/commit/de486186acfec2604d749b9f6d2b4656a9e9280a) Thanks [@bc-svc-local](https://github.com/bc-svc-local)! - Update translations.
+
+## 0.18.0
+
+### Minor Changes
+
+- [#1491](https://github.com/bigcommerce/catalyst/pull/1491) [`313a591`](https://github.com/bigcommerce/catalyst/commit/313a5913181a144b53cb12208132f4a9924e2256) Thanks [@jorgemoya](https://github.com/jorgemoya)! - Bump `next-intl` which includes [some minor changes and updated APIs](<(https://next-intl-docs.vercel.app/blog/next-intl-3-22)>):
+
+  - Use new `createNavigation` api.
+  - Pass `locale` to redirects.
+  - `setRequestLocale` is no longer unstable.
+
+### Patch Changes
+
+- [#1505](https://github.com/bigcommerce/catalyst/pull/1505) [`691ec2b`](https://github.com/bigcommerce/catalyst/commit/691ec2bcbb8839446463e292856080cc9b16c584) Thanks [@bc-alexsaiannyi](https://github.com/bc-alexsaiannyi)! - update login page & error message styles
+
+- [#1506](https://github.com/bigcommerce/catalyst/pull/1506) [`ac83d3e`](https://github.com/bigcommerce/catalyst/commit/ac83d3eb98e19307a3a82fa94c222cff3c0806f0) Thanks [@bc-yevhenii-buliuk](https://github.com/bc-yevhenii-buliuk)! - remove unnecessary fields from account settings form and update confirmation message
+
+- [#1499](https://github.com/bigcommerce/catalyst/pull/1499) [`b5aea9b`](https://github.com/bigcommerce/catalyst/commit/b5aea9b36159d11a77d090fee62cb1736bc794be) Thanks [@jorgemoya](https://github.com/jorgemoya)! - Bumps next-intl to fix issue with hashes and query params in urls.
+
+- [#1511](https://github.com/bigcommerce/catalyst/pull/1511) [`370d0b1`](https://github.com/bigcommerce/catalyst/commit/370d0b18f0f47100d7e520fcf9f209f6e41f34e9) Thanks [@bc-alexsaiannyi](https://github.com/bc-alexsaiannyi)! - update styles for reset password validation
+
+- [#1454](https://github.com/bigcommerce/catalyst/pull/1454) [`53599e6`](https://github.com/bigcommerce/catalyst/commit/53599e6e02988ab63d158c5c9f587669a5581402) Thanks [@bc-yevhenii-buliuk](https://github.com/bc-yevhenii-buliuk)! - remove unnecessary fields from create account form
+
+- [#1487](https://github.com/bigcommerce/catalyst/pull/1487) [`a22233f`](https://github.com/bigcommerce/catalyst/commit/a22233f8fc94c5ad602fa734cadbb892af34fe6b) Thanks [@bc-svc-local](https://github.com/bc-svc-local)! - Update translations.
+
+## 0.17.1
+
+### Patch Changes
+
+- Updated dependencies [[`d4120d3`](https://github.com/bigcommerce/catalyst/commit/d4120d39c10398e842a7ebe14ada685ec8aae3a8)]:
+  - @bigcommerce/catalyst-client@0.11.0
+
+## 0.17.0
+
+### Minor Changes
+
+- [#1401](https://github.com/bigcommerce/catalyst/pull/1401) [`3095002`](https://github.com/bigcommerce/catalyst/commit/3095002d7a10b9c4058016076deb7a45fc8ae7bb) Thanks [@bookernath](https://github.com/bookernath)! - Add dynamic robots.txt from control panel settings
+
+### Patch Changes
+
+- [#1477](https://github.com/bigcommerce/catalyst/pull/1477) [`79e705f`](https://github.com/bigcommerce/catalyst/commit/79e705f151a733a811effed40757030aba6b6300) Thanks [@deini](https://github.com/deini)! - Breadcrumbs for top level category pages are no longer rendered
+
+- [#1467](https://github.com/bigcommerce/catalyst/pull/1467) [`e763a83`](https://github.com/bigcommerce/catalyst/commit/e763a83bcd4b8b5311586247291338eb65fbc476) Thanks [@deini](https://github.com/deini)! - Fixes an issue when a numeric product option set to a minimum <= 0 breaks the counter component.
+
+- [#1459](https://github.com/bigcommerce/catalyst/pull/1459) [`b4485c7`](https://github.com/bigcommerce/catalyst/commit/b4485c76de8c83546c68a7b50fcb7991603dbf6e) Thanks [@chanceaclark](https://github.com/chanceaclark)! - Updates the with-routes middleware to fallback on locale based rewrite logic if the redirect is a dynamic entity redirect.
+
+- [#1469](https://github.com/bigcommerce/catalyst/pull/1469) [`8e9e7f3`](https://github.com/bigcommerce/catalyst/commit/8e9e7f3d40545004b080146b4dbb42f4ac7cf17c) Thanks [@chanceaclark](https://github.com/chanceaclark)! - Fixes the product quantity reseting back to the previous value when adjusting the quantity fails.
+
+- [#1476](https://github.com/bigcommerce/catalyst/pull/1476) [`d47e3ac`](https://github.com/bigcommerce/catalyst/commit/d47e3aceb244713bc996287319357e6af3d865ed) Thanks [@deini](https://github.com/deini)! - adds an empty state to category pages
+
+- [#1458](https://github.com/bigcommerce/catalyst/pull/1458) [`3d67f8d`](https://github.com/bigcommerce/catalyst/commit/3d67f8d0d1776d747e9aa485b0b29a738eeacf3c) Thanks [@chanceaclark](https://github.com/chanceaclark)! - Add no-store to mutations that are rate limited.
+
+- [#1453](https://github.com/bigcommerce/catalyst/pull/1453) [`1c8b042`](https://github.com/bigcommerce/catalyst/commit/1c8b04278074eb55358a5515f330a011de9561b5) Thanks [@bc-svc-local](https://github.com/bc-svc-local)! - Update translations.
+
+- Updated dependencies [[`2d1526a`](https://github.com/bigcommerce/catalyst/commit/2d1526a50402b2eb677abd55f19fb904234d1a84)]:
+  - @bigcommerce/catalyst-client@0.10.0
+
 ## 0.16.0
 
 ### Minor Changes
